@@ -250,21 +250,22 @@
 
       // -----------------------------------------------------------------------
 
+      $mailNew = new PHPMailer();
       // SMTP settings
-      $mail->isSMTP();
-      $mail->Host = $host;
-      $mail->SMTPAuth = true;
-      $mail->Username = $emailUsername;
-      $mail->Password = $emailPassword;
-      $mail->SMTPSecure = 'ssl';
-      $mail->SMTPDebug = 3;
-      $mail->Port = $port;
+      $mailNew->isSMTP();
+      $mailNew->Host = $host;
+      $mailNew->SMTPAuth = true;
+      $mailNew->Username = $emailUsername;
+      $mailNew->Password = $emailPassword;
+      $mailNew->SMTPSecure = 'ssl';
+      $mailNew->SMTPDebug = 3;
+      $mailNew->Port = $port;
 
       // Email settings
-      $mail->setFrom('consultancy@alwayssahi.com', 'Travel.');
-      $mail->addAddress('mandeepdalavi@gmail.com', 'Mandeep');
-      // $mail->addAddress('ellen@example.com');
-      $mail->addReplyTo('consultancy@alwayssahi.com', 'Travel.');
+      $mailNew->setFrom('consultancy@alwayssahi.com', 'Travel.');
+      $mailNew->addAddress('mandeepdalavi@gmail.com', 'Mandeep');
+      // $mNewail->addAddress('ellen@example.com');
+      $mailNew->addReplyTo('consultancy@alwayssahi.com', 'Travel.');
       // $mail->addCC('cc@example.com');
       // $mail->addBCC('');
       // if(isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
@@ -274,9 +275,9 @@
       // $mail->addAttachment($offerletter, 'new.jpg'); 
       
       //Content
-      $mail->isHTML(true);                                  //Set email format to HTML
-      $mail->Subject = 'Request Registered | Travel.';
-      $mail->Body    = "
+      $mailNew->isHTML(true);                                  //Set email format to HTML
+      $mailNew->Subject = 'Request Registered | Travel.';
+      $mailNew->Body    = "
       
          <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
          <html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" style=\"font-family:arial, 'helvetica neue', helvetica, sans-serif\"> 
@@ -446,10 +447,10 @@
          </html>
       
       ";
-      $mail->AltBody = '<h2>Travel.</h2><br><br><h4>NEW ENQUIRY RAISED</h4><br><strong>DATE:&nbsp;'.$currDate.'</strong><br>Details mentioned by customer:<br><ul><li><strong>Name:&nbsp;</strong>'.$name.'</li><li><strong>Email:&nbsp;</strong>'.$email.'</li><li><strong>Phone:&nbsp;</strong>'.$phone.'</li><li><strong>Address:&nbsp;</strong>'.$address.'</li><li><strong>Where To:&nbsp;</strong>'.$location.'</li><li><strong>How Many:&nbsp;</strong>'.$guests.'</li><li><strong>Arrivals:&nbsp;</strong>'.$arrivals.'</li><li><strong>Leaving:&nbsp;</strong>'.$leaving.'</li><ul>';
+      $mailNew->AltBody = '<h2>Travel.</h2><br><br><h4>NEW ENQUIRY RAISED</h4><br><strong>DATE:&nbsp;'.$currDate.'</strong><br>Details mentioned by customer:<br><ul><li><strong>Name:&nbsp;</strong>'.$name.'</li><li><strong>Email:&nbsp;</strong>'.$email.'</li><li><strong>Phone:&nbsp;</strong>'.$phone.'</li><li><strong>Address:&nbsp;</strong>'.$address.'</li><li><strong>Where To:&nbsp;</strong>'.$location.'</li><li><strong>How Many:&nbsp;</strong>'.$guests.'</li><li><strong>Arrivals:&nbsp;</strong>'.$arrivals.'</li><li><strong>Leaving:&nbsp;</strong>'.$leaving.'</li><ul>';
 
-      if(!$mail->send()) {
-         echo "<script>alert('Message could not be sent! Mailer Error: ".$mail->ErrorInfo." !');</script>";
+      if(!$mailNew->send()) {
+         echo "<script>alert('Message could not be sent! Mailer Error: ".$mailNew->ErrorInfo." !');</script>";
       } else {
          echo "<script>alert('Your Request has been sent!');</script>";
          // echo "<script>alert('Message has been sent! to Recipient: ".$email."');</script>";
